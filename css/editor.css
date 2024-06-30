@@ -1,0 +1,48 @@
+:host {
+    --content-bg: white;
+}
+
+pre, code{
+    white-space:normal;
+}
+
+code {
+    display: block;
+    width: 100%;
+    overflow-wrap: anywhere;
+}
+
+.editor__file {
+    display: none;
+}
+
+.editor__file--open {
+    border: 1px solid red;
+    display: flex;
+}
+
+.editor__line {
+    display: flex;
+    flex-direction: row;
+    align-items: start;
+    max-width: 100%;
+    overflow-wrap: break-word;
+    background-color: #f0f0f0;
+}
+
+.editor__line_number {
+    padding: 0 10px;
+    user-select: none;
+}
+
+.editor__line_number span {
+    display: block;
+}
+
+.editor__line_content {
+    padding-left: 10px;
+    display: block;
+    width: 100%;
+    border-left: 1px solid #e0e0e0;
+    background-color: var(--content-bg);
+}

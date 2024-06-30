@@ -1,13 +1,30 @@
 <!DOCTYPE html>
 <html>
-<head>
+  <head>
     <title>Home</title>
-    <script src="./index.js" type="module" ></script>
-</head>
-<body>
-    <h1>Welcome to the Home Page</h1>
-    <p>Click <a href="login.php">here</a> to login</p>
-
+    <script src="./index.js" type="module"></script>
+  </head>
+  <body>
     <editor-component />
-</body>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const editor = document.getElementsByTagName("editor-component")[0];
+        editor.addFile(
+          "fr.json",
+          `
+            {
+                "greetings": "Bonjour le monde",
+                "welcome": "Bienvenue sur i18n-translate-generator"
+            }
+            `,
+          "javascript"
+        );
+        editor.addFile(
+          "test.js",
+          `print\nprint('hola!')\nprint("prueba!")`,
+          "python"
+        );
+      });
+    </script>
+  </body>
 </html>
