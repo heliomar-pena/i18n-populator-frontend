@@ -1,0 +1,18 @@
+---
+import style from "./TranslationEnginer.module.css";
+import { Image } from "astro:assets";
+
+const { img, title, alt, height, width } = Astro.props;
+---
+
+<div class={style.TranslationEnginer}>
+  <Image
+    height={height || 110}
+    width={width || 110}
+    class={style["TranslationEnginer__image"]}
+    src={img}
+    alt={title}
+    loading="lazy"
+  />
+  <h3 class={style["TranslationEnginer__title"]}>{title}</h3>
+</div>

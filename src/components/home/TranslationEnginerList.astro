@@ -1,0 +1,32 @@
+---
+import TranslationEnginer from "./TranslationEnginer.astro";
+import styles from "./TranslationEnginerList.module.css";
+
+import googleLogo from "../../assets/logos/Google_Translate.png";
+import bingLogo from "../../assets/logos/Bing.png";
+import openaiLogo from "../../assets/logos/ChatGPT.png";
+import deeplLogo from "../../assets/logos/DeepL.png";
+
+const engines = [
+  { name: "Google Translate", src: googleLogo, alt: "Google Translate logo" },
+  { name: "Bing", src: bingLogo, alt: "Bing logo" },
+  { name: "OpenAI", src: openaiLogo, alt: "OpenAI logo" },
+  { name: "DeepL", src: deeplLogo, alt: "DeepL logo", width: 89, height: 111 },
+];
+---
+
+<ul class={styles.TranslationEnginerList}>
+  {
+    engines.map((engine) => (
+      <li class={styles["TranslationEngineList__item"]}>
+        <TranslationEnginer
+          img={engine.src}
+          title={engine.name}
+          alt={engine.alt}
+          width={engine.width}
+          height={engine.height}
+        />
+      </li>
+    ))
+  }
+</ul>

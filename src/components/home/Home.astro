@@ -1,0 +1,87 @@
+---
+import Button from "../ui/Button.astro";
+import styles from "./Home.module.css";
+import ChevronDown from "../icons/ChevronDown.astro";
+import TranslationEnginerList from "./TranslationEnginerList.astro";
+import Countries from "./Countries.astro";
+import Skeleton from "./Skeleton.astro";
+---
+
+<main class={styles.Home}>
+  <section class={styles["Home__hero"]}>
+    <div class={styles["Home__hero-container"]}>
+      <div class={styles["Home__hero-cta"]}>
+        <h1 class={styles["Home__hero-title"]}>
+          Crea traducciones en segundos con un solo comando
+        </h1>
+        <Button class={styles["Home__hero-button"]} href="/start">
+          Empezar
+        </Button>
+      </div>
+      <div class={styles["Home__hero-demo"]}>
+        <Skeleton width={427} height={391} />
+      </div>
+      <Button class={styles["Home__hero-button--small-screen"]} href="/start">
+        Empezar
+      </Button>
+    </div>
+    <footer class={styles["Home__hero-footer"]}>
+      <div class={styles["Home__hero-footer-space"]}></div>
+      <p class={styles["Home__hero-footer-text"]}>¿Cómo funciona?</p>
+      <div class={styles["Home__hero-footer-icon"]}>
+        <ChevronDown />
+      </div>
+    </footer>
+  </section>
+  <div class={styles.Home__content}>
+    <section
+      class:list={[styles["Home__content-section"], styles["Home__comparison"]]}
+    >
+      <h2>No más traducciones manuales</h2>
+      <p>
+        Cuando trabajas con proyectos internacionalizados, uno de los mayores
+        retos es agregar traducciones para cada texto incluído en cada uno de
+        los idiomas soportados.
+      </p>
+      <p>
+        Esto no es solo lento y te detiene de programar para realizar tareas
+        manuales y tediosas, sino que además es muy propenso a errores humanos y
+        causar conflictos con las traducciones agregadas por tus compañeros.
+      </p>
+      <p>
+        Usando <b>i18n-populator</b> como herramienta central para agregar traducciones
+        en tu equipo, prevendrá conflictos entre ramas (al incluir las traducciones
+        alfabéticamente) y disminuirá el número de errors humanos (no más traducciones
+        manuales).
+      </p>
+      <Skeleton width={1226} height={604} />
+    </section>
+    <section
+      class:list={[
+        styles["Home__content-section"],
+        styles["Home__translators"],
+      ]}
+    >
+      <h2>Usa tu motor de traducción favorito</h2>
+      <p>
+        <b>i18n-populator</b> está actualizándose constantemente para agregar soporte
+        a nuevos motores de traducción.
+      </p>
+      <TranslationEnginerList />
+    </section>
+    <section
+      class:list={[styles["Home__content-section"], styles["Home__countries"]]}
+    >
+      <h2>Genera traducciones para más de 150 países</h2>
+      <p>
+        Traduce tu contenido a más de 184 idiomas y hazlo accesible globalmente.
+      </p>
+      <Countries />
+    </section>
+    <div class={styles["Home__footer-cta"]}>
+      <Button class={styles["Home__footer-cta-button"]} href="/start">
+        Empezar a Generar Traducciones
+      </Button>
+    </div>
+  </div>
+</main>

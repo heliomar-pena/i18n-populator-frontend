@@ -1,0 +1,32 @@
+---
+import styles from "./Button.module.css";
+const {
+  href,
+  type = "button",
+  class: className,
+  variant = "primary",
+  ...props
+} = Astro.props;
+
+const buildVariantStyleName = (modificator: string) => `Button--${modificator}`;
+
+const variantStyle =
+  styles[buildVariantStyleName(variant)] ??
+  styles[buildVariantStyleName("primary")];
+---
+
+{
+  href ? (
+    <a
+      href={href}
+      {...props}
+      class:list={[className, styles.Button, variantStyle]}
+    >
+      <slot />
+    </a>
+  ) : (
+    <button type={type} {...props} class:list={[className, styles.Button, variantStyle]}>
+      <slot />
+    </button>
+  )
+}

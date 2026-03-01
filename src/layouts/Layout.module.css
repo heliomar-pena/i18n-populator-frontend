@@ -1,0 +1,11 @@
+.Layout {
+  max-width: 1300px;
+  min-height: 100vh;
+  height: 100%;
+  width: 100%;
+  margin: 0 auto;
+  position: relative;
+  background-color: var(--white--500);
+
+  --navbar-height: 5rem;
+}

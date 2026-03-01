@@ -1,0 +1,12 @@
+.Navbar__header {
+  padding: var(--space--4);
+  max-height: var(--navbar-height);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.Navbar__title {
+  font-size: var(--header--h1);
+  font-family: var(--font--header);
+}

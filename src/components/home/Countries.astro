@@ -1,0 +1,26 @@
+---
+import countries from "../../data/countries.json";
+import styles from "./Countries.module.css";
+---
+
+<ul
+  class={styles.Countries}
+  role="list"
+  aria-label="Supported languages"
+>
+  {countries.map((c) => (
+    <li
+      class={styles["Countries__item"]}
+      title={c.name}
+    >
+      <img
+        class={styles["Countries__image"]}
+        src={`/assets/countries/${c.code}.png`}
+        alt={`Flag of ${c.name}`}
+        width="160"
+        height="120"
+        loading="lazy"
+      />
+    </li>
+  ))}
+</ul>
