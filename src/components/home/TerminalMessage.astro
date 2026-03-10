@@ -1,0 +1,15 @@
+---
+import type { Message } from './TerminalMessage.type';
+
+interface Props {
+  messages: Message[];
+}
+
+const { messages } = Astro.props;
+---
+
+<message-ui class="TerminalMessage" data-messages={JSON.stringify(messages)} id="terminal-messages">
+</message-ui>
+
+<script src="./TerminalMessage.ts">
+</script>

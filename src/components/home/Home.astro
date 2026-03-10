@@ -5,6 +5,21 @@ import ChevronDown from "../icons/ChevronDown.astro";
 import TranslationEnginerList from "./TranslationEnginerList.astro";
 import Countries from "./Countries.astro";
 import Skeleton from "./Skeleton.astro";
+import Terminal from "./Terminal.astro";
+import type { Message } from "./TerminalMessage.type";
+
+const messages: Message[] = [
+  {
+    text: 'node dist/cli.cjs --text “Hello beautiful world” --from “en” --name "greeting"',
+    duration: 800,
+    animation: "write"
+  },
+  {
+    text: 'Generating translations...',
+    duration: 1000,
+    animation: "fade"
+  }
+];
 ---
 
 <main class={styles.Home}>
@@ -19,7 +34,7 @@ import Skeleton from "./Skeleton.astro";
         </Button>
       </div>
       <div class={styles["Home__hero-demo"]}>
-        <Skeleton width={427} height={391} />
+        <Terminal title="Terminal - Awesome Project" messages={messages} />
       </div>
       <Button class={styles["Home__hero-button--small-screen"]} href="/start">
         Empezar

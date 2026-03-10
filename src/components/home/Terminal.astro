@@ -1,0 +1,17 @@
+---
+import styles from "./Terminal.module.css";
+import TerminalMessage from "./TerminalMessage.astro";
+import type { Message } from "./TerminalMessage.type";
+
+interface Props {
+    messages: Message[];
+    title: string;
+}
+
+const { title, messages } = Astro.props;
+---
+
+<section class={styles.Terminal}>
+  <header><h2 class={styles.TerminalHeader}>{title}</h2></header>
+  <TerminalMessage messages={messages} />
+</section>
