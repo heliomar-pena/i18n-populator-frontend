@@ -11,13 +11,43 @@ import type { Message } from "./TerminalMessage.type";
 const messages: Message[] = [
   {
     text: 'node dist/cli.cjs --text “Hello beautiful world” --from “en” --name "greeting"',
-    duration: 800,
+    duration: 2000,
     animation: "write"
   },
   {
     text: 'Generating translations...',
     duration: 1000,
     animation: "fade"
+  },
+  {
+    text: "Translated successfully to English with Google Translate: Hello beautiful world",
+    duration: 700,
+    animation: "fade"
+  },
+  {
+    text: "Translated successfully to Spanish with Google Translate: Hola hermoso mundo",
+    duration: 700,
+    animation: "fade"
+  },
+  {
+    text: "Translated successfully to Japanese with Google Translate: こんにちは美しい世界",
+    duration: 700,
+    animation: "fade"
+  },
+  {
+    text: "Translated successfully to French with Google Translate: Bonjour monde magnifique",
+    duration: 700,
+    animation: "fade"
+  },
+  {
+    text: "Translated successfully to German with Google Translate: Hallo schöne Welt",
+    duration: 700,
+    animation: "fade"
+  },
+  {
+    text: "",
+    duration: 500,
+    animation: "write"
   }
 ];
 ---

@@ -1,18 +1,27 @@
-import { from, concatMap, of, delay, tap, iif, mergeMap, map, finalize } from "rxjs";
+import {
+  from,
+  concatMap,
+  of,
+  delay,
+  tap,
+  iif,
+  mergeMap,
+  map,
+  finalize,
+} from "rxjs";
 import type { Message, MessageAnimation } from "./TerminalMessage.type";
 import styles from "./TerminalMessage.module.css";
 
 const animationClasses: Record<MessageAnimation, string> = {
-  write: "TerminalMessage--write",
-  fade: "TerminalMessage--fade",
+  write: styles["TerminalMessage__message--write"],
+  fade: styles["TerminalMessage__message--fade"],
 };
 
 const buildDepthClass = (depth: number) => {
-  return `TerminalMessage--depth-${depth}`;
+  return `TerminalMessage__message--depth-${depth}`;
 };
 
 const writeMessage = (
-  container: HTMLUListElement,
   element: HTMLLIElement,
   message: Message,
 ) => {
@@ -28,23 +37,23 @@ const writeMessage = (
         }),
       ),
     ),
+    delay(300),
+    finalize(() => {
+      element.classList.add(styles["TerminalMessage__message--write-finished"]);
+    }),
   );
 };
 
 const renderMessage = (
-  container: HTMLUListElement,
   element: HTMLLIElement,
   message: Message,
 ) => {
-  const normalClass = styles.TerminalMessage;
-  const depthClass = buildDepthClass(message.depth ?? 0);
-  const animationClass = animationClasses[message.animation ?? "fade"];
-
-  element.textContent = message.text;
-  element.classList.add(normalClass, depthClass, animationClass);
-  container.appendChild(element);
-
-  return of(null).pipe(delay(message.duration ?? 0));
+  return of(message.text).pipe(
+    tap((text) => {
+      element.textContent = text;
+    }),
+    delay(message.duration ?? 0),
+  );
 };
 
 class MessageUI extends HTMLElement {
@@ -53,6 +62,7 @@ class MessageUI extends HTMLElement {
     const messages = JSON.parse(rawMessages) as Message[];
     const ulElement = document.createElement("ul");
     this.appendChild(ulElement);
+    ulElement.classList.add(styles["TerminalMessage"]);
 
     from(messages)
       .pipe(
@@ -60,7 +70,7 @@ class MessageUI extends HTMLElement {
           of(message).pipe(
             map((msg) => {
               const element = document.createElement("li");
-              const normalClass = styles.TerminalMessage;
+              const normalClass = styles.TerminalMessage__message;
               const depthClass = buildDepthClass(message.depth ?? 0);
               const animationClass =
                 animationClasses[message.animation ?? "fade"];
@@ -73,11 +83,10 @@ class MessageUI extends HTMLElement {
             mergeMap(({ msg, element }) =>
               iif(
                 () => msg.animation === "write",
-                writeMessage(ulElement, element, msg),
-                renderMessage(ulElement, element, msg),
+                writeMessage(element, msg),
+                renderMessage(element, msg),
               ),
             ),
-            delay((message.duration ?? 0) + (message.delayAfter ?? 0)),
           ),
         ),
       )

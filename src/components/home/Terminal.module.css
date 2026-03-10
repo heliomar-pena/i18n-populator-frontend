@@ -5,9 +5,10 @@
   font-size: var(--body--small);
   color: var(--black--900);
   box-shadow: var(--shadow--normal);
-  width: 100%;
   border-radius: var(--radius--2);
   overflow: hidden;
+  width: 427px;
+  height: 391px;
 }
 
 .TerminalHeader {

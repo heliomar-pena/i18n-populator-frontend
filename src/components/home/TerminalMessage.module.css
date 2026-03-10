@@ -1,7 +1,50 @@
 .TerminalMessage {
-    list-style: none;
-    margin: 0;
-    padding: 0;
+  list-style: none;
+  margin: 0;
+  padding: var(--space--4) var(--space--4) var(--space--4) var(--space--8);
 }
 
+.TerminalMessage__message {
+  position: relative;
+}
 
+.TerminalMessage__message--write:last-child::after {
+  content: "|";
+  opacity: 0%;
+  animation: 0.5s ease-in-out 0.5s infinite alternate blink;
+}
+
+@keyframes blink {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.TerminalMessage__message--write::before {
+  content: "○ ";
+  position: absolute;
+  left: calc(var(--space--4) * -1);
+}
+
+.TerminalMessage__message--write-finished:not(:last-child)::before {
+  content: "● ";
+  color: green;
+}
+
+.TerminalMessage__message--fade {
+  font-weight: 400;
+  opacity: 0;
+  animation: 150ms linear forwards fade;
+}
+
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
