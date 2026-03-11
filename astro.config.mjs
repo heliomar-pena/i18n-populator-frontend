@@ -1,8 +1,11 @@
 // @ts-check
-import { defineConfig } from 'astro/config';
+import { defineConfig } from "astro/config";
+import { loadEnv } from 'vite';
+
+const env = process.env.NODE_ENV ? loadEnv(process.env.NODE_ENV, process.cwd(), '') : {};
 
 // https://astro.build/config
 export default defineConfig({
-    site: 'https://heliomar-pena.github.io',
-    base: '/i18n-populator-frontend'
+    base: env.BASE_URL,
+    site: env.SITE
 });

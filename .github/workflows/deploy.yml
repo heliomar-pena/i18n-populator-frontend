@@ -20,7 +20,10 @@ jobs:
         uses: withastro/action@v5
         with:
           node-version: 24.13.0 
-          
+        env:
+          BASE_URL=https://heliomar-pena.github.io
+          SITE=/i18n-populator-frontend
+
   deploy:
     needs: build
     runs-on: ubuntu-latest
