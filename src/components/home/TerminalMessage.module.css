@@ -5,7 +5,9 @@
 }
 
 .TerminalMessage__message {
+  --padding-left-multiplier: 0;
   position: relative;
+  padding-left: calc(var(--space--4) * var(--padding-left-multiplier));
 }
 
 .TerminalMessage__message--write:last-child::after {
@@ -47,4 +49,20 @@
   to {
     opacity: 1;
   }
+}
+
+.TerminalMessage__message--depth-0 {
+  --padding-left-multiplier: 0;
+}
+
+.TerminalMessage__message--depth-1 {
+  --padding-left-multiplier: 1;
+}
+
+.TerminalMessage__message--depth-2 {
+  --padding-left-multiplier: 2;
+}
+
+.TerminalMessage__message--depth-3 {
+  --padding-left-multiplier: 3;
 }

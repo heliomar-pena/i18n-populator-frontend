@@ -18,7 +18,7 @@ const animationClasses: Record<MessageAnimation, string> = {
 };
 
 const buildDepthClass = (depth: number) => {
-  return `TerminalMessage__message--depth-${depth}`;
+  return styles[`TerminalMessage__message--depth-${depth}`];
 };
 
 const writeMessage = (
