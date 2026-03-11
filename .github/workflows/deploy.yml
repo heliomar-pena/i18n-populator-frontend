@@ -21,8 +21,8 @@ jobs:
         with:
           node-version: 24.13.0 
         env:
-          BASE_URL=https://heliomar-pena.github.io
-          SITE=/i18n-populator-frontend
+          BASE_URL: /i18n-populator-frontend
+          SITE: https://heliomar-pena.github.io
 
   deploy:
     needs: build
