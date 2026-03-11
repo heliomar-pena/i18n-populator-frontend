@@ -2,7 +2,7 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [ main ]
+    branches: [ dev ]
   workflow_dispatch:
 
 permissions:
@@ -19,8 +19,8 @@ jobs:
       - name: Install, build, and upload your site
         uses: withastro/action@v5
         with:
-          node-version: 24.13.0 # The specific version of Node that should be used to build your site. Defaults to 22. (optional)
-
+          node-version: 24.13.0 
+          
   deploy:
     needs: build
     runs-on: ubuntu-latest
