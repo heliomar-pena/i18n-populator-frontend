@@ -1,0 +1,41 @@
+.CodeEditor {
+  display: block;
+  width: var(--terminal--width);
+  height: var(--terminal--height);
+  overflow: hidden;
+  border-top-left-radius: var(--radius--2);
+  border-top-right-radius: var(--radius--2);
+
+  background-color: var(--white--400);
+  box-shadow: var(--shadow--normal);
+
+  position: relative;
+  transform: translateY(-90%) translateX(5%);
+  z-index: -1;
+}
+
+.CodeEditor__tabs {
+  display: flex;
+  font-family: var(--font--monospaced);
+  font-weight: 500;
+  overflow-x: auto;
+  container-type: scroll-state;
+  container-name: tabs-container;
+}
+
+.CodeEditor__tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.CodeEditor__tab {
+  min-width: 100px;
+  background-color: var(--white--700);
+  color: var(--black-500);
+  padding: var(--space--3) var(--space--2);
+  cursor: pointer;
+}
+
+.CodeEditor__tab:has(:checked) {
+  background-color: var(--primary--500);
+  color: var(--primary--900);
+}

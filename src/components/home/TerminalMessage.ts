@@ -8,9 +8,11 @@ import {
   mergeMap,
   map,
   finalize,
+  filter,
 } from "rxjs";
 import type { Message, MessageAnimation } from "./TerminalMessage.type";
 import styles from "./TerminalMessage.module.css";
+import fileStore from "./fileStore";
 
 const animationClasses: Record<MessageAnimation, string> = {
   write: styles["TerminalMessage__message--write"],
@@ -21,10 +23,7 @@ const buildDepthClass = (depth: number) => {
   return styles[`TerminalMessage__message--depth-${depth}`];
 };
 
-const writeMessage = (
-  element: HTMLLIElement,
-  message: Message,
-) => {
+const writeMessage = (element: HTMLLIElement, message: Message) => {
   const chars = [...(message.text ?? [])];
   const duration = message.duration / chars.length;
 
@@ -44,15 +43,16 @@ const writeMessage = (
   );
 };
 
-const renderMessage = (
-  element: HTMLLIElement,
-  message: Message,
-) => {
+const renderMessage = (element: HTMLLIElement, message: Message) => {
   return of(message.text).pipe(
     tap((text) => {
       element.textContent = text;
     }),
     delay(message.duration ?? 0),
+    filter(() => message.payload !== undefined),
+    tap(() => {
+      fileStore.next([...fileStore.getValue(), message.payload!]);
+    }),
   );
 };
 

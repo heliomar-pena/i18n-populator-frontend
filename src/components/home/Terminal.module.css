@@ -7,8 +7,8 @@
   box-shadow: var(--shadow--normal);
   border-radius: var(--radius--2);
   overflow: hidden;
-  width: 427px;
-  height: 391px;
+  width: var(--terminal--width);
+  height: var(--terminal--height);
 }
 
 .TerminalHeader {

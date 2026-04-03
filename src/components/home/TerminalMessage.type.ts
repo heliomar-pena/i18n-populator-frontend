@@ -1,5 +1,11 @@
 export type MessageAnimation = "write" | "fade";
 
+export interface MessagePayload {
+  language: string;
+  translation: string;
+  name: string;
+}
+
 export interface Message {
   icon?: string;
   text: string;
@@ -7,4 +13,5 @@ export interface Message {
   animation?: MessageAnimation;
   duration: number;
   delayAfter?: number;
+  payload?: MessagePayload;
 }

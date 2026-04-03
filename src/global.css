@@ -68,6 +68,10 @@
   --radius--4: 1rem;     /* 16px */
 
   --radius--full: 9999px;
+
+  /* Terminal and code editor dimensions */
+  --terminal--width: 427px;
+  --terminal--height: 391px;
 }
 
 body {

@@ -7,6 +7,7 @@ import Countries from "./Countries.astro";
 import Skeleton from "./Skeleton.astro";
 import Terminal from "./Terminal.astro";
 import type { Message } from "./TerminalMessage.type";
+import CodeEditor from "./CodeEditor.astro";
 
 const messages: Message[] = [
   {
@@ -25,36 +26,61 @@ const messages: Message[] = [
     duration: 700,
     animation: "fade",
     depth: 1,
+    payload: {
+      language: "en",
+      translation: "Hello beautiful world",
+      name: "greeting"
+    }
   },
   {
     text: "Translated successfully to Spanish with Google Translate: Hola hermoso mundo",
     duration: 700,
     animation: "fade",
-    depth: 1
+    depth: 1,
+    payload: {
+      language: "es",
+      translation: "Hola hermoso mundo",
+      name: "greeting"
+    }
   },
   {
     text: "Translated successfully to Japanese with Google Translate: こんにちは美しい世界",
     duration: 700,
     animation: "fade",
-    depth: 1
+    depth: 1,
+    payload: {
+      language: "jp",
+      translation: "こんにちは美しい世界",
+      name: "greeting"
+    }
   },
   {
     text: "Translated successfully to French with Google Translate: Bonjour monde magnifique",
     duration: 700,
     animation: "fade",
     depth: 1,
+    payload: {
+      language: "fr",
+      translation: "Bonjour monde magnifique",
+      name: "greeting"
+    }
   },
   {
     text: "Translated successfully to German with Google Translate: Hallo schöne Welt",
     duration: 700,
     animation: "fade",
-    depth: 1
+    depth: 1,
+    payload: {
+      language: "de",
+      translation: "Hallo schöne Welt",
+      name: "greeting"
+    }
   },
   {
     text: "",
     duration: 500,
     animation: "write",
-    depth: 1
+    depth: 1,
   }
 ];
 ---
@@ -72,6 +98,7 @@ const messages: Message[] = [
       </div>
       <div class={styles["Home__hero-demo"]}>
         <Terminal title="Terminal - Awesome Project" messages={messages} />
+        <CodeEditor />
       </div>
       <Button class={styles["Home__hero-button--small-screen"]} href="/start">
         Empezar
