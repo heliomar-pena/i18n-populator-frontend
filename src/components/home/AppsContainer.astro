@@ -1,0 +1,26 @@
+---
+import styles from "./AppsContainer.module.css";
+---
+
+<app-container>
+  <div
+    class:list={[
+      styles["AppsContainer__app"],
+      styles["AppsContainer__app--default-first"],
+      styles["AppsContainer__app--first"],
+    ]}
+  >
+    <slot name="first-app" />
+  </div>
+  <div
+    class:list={[
+      styles["AppsContainer__app"],
+      styles["AppsContainer__app--default-second"],
+      styles["AppsContainer__app--second"],
+    ]}
+  >
+    <slot name="second-app" />
+  </div>
+</app-container>
+
+<script src="./AppContainer.ts"></script>

@@ -8,7 +8,6 @@ import {
   mergeMap,
   map,
   finalize,
-  filter,
 } from "rxjs";
 import type { Message, MessageAnimation } from "./TerminalMessage.type";
 import styles from "./TerminalMessage.module.css";
@@ -48,11 +47,10 @@ const renderMessage = (element: HTMLLIElement, message: Message) => {
     tap((text) => {
       element.textContent = text;
     }),
-    delay(message.duration ?? 0),
-    filter(() => message.payload !== undefined),
     tap(() => {
-      fileStore.next({...fileStore.getValue(), [message.payload!.language]: message.payload!});
+      if (message.payload !== undefined) fileStore.next({...fileStore.getValue(), [message.payload!.language]: message.payload!});
     }),
+    delay(message.duration ?? 0),
   );
 };
 

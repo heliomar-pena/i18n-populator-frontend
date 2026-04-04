@@ -8,18 +8,19 @@ import Skeleton from "./Skeleton.astro";
 import Terminal from "./Terminal.astro";
 import type { Message } from "./TerminalMessage.type";
 import CodeEditor from "./CodeEditor.astro";
+import AppsContainer from "./AppsContainer.astro";
 
 const messages: Message[] = [
   {
     text: 'node dist/cli.cjs --text “Hello beautiful world” --from “en” --name "greeting"',
     duration: 2000,
-    animation: "write"
+    animation: "write",
   },
   {
-    text: 'Generating translations...',
+    text: "Generating translations...",
     duration: 1000,
     animation: "fade",
-    depth: 1
+    depth: 1,
   },
   {
     text: "Translated successfully to English with Google Translate: Hello beautiful world",
@@ -29,8 +30,8 @@ const messages: Message[] = [
     payload: {
       language: "en",
       translation: "Hello beautiful world",
-      name: "greeting"
-    }
+      name: "greeting",
+    },
   },
   {
     text: "Translated successfully to Spanish with Google Translate: Hola hermoso mundo",
@@ -40,8 +41,8 @@ const messages: Message[] = [
     payload: {
       language: "es",
       translation: "Hola hermoso mundo",
-      name: "greeting"
-    }
+      name: "greeting",
+    },
   },
   {
     text: "Translated successfully to Japanese with Google Translate: こんにちは美しい世界",
@@ -51,8 +52,8 @@ const messages: Message[] = [
     payload: {
       language: "jp",
       translation: "こんにちは美しい世界",
-      name: "greeting"
-    }
+      name: "greeting",
+    },
   },
   {
     text: "Translated successfully to French with Google Translate: Bonjour monde magnifique",
@@ -62,8 +63,8 @@ const messages: Message[] = [
     payload: {
       language: "fr",
       translation: "Bonjour monde magnifique",
-      name: "greeting"
-    }
+      name: "greeting",
+    },
   },
   {
     text: "Translated successfully to German with Google Translate: Hallo schöne Welt",
@@ -73,15 +74,15 @@ const messages: Message[] = [
     payload: {
       language: "de",
       translation: "Hallo schöne Welt",
-      name: "greeting"
-    }
+      name: "greeting",
+    },
   },
   {
     text: "",
     duration: 500,
     animation: "write",
     depth: 1,
-  }
+  },
 ];
 ---
 
@@ -97,8 +98,14 @@ const messages: Message[] = [
         </Button>
       </div>
       <div class={styles["Home__hero-demo"]}>
-        <Terminal title="Terminal - Awesome Project" messages={messages} />
-        <CodeEditor />
+        <AppsContainer>
+          <Terminal
+            slot="first-app"
+            title="Terminal - Awesome Project"
+            messages={messages}
+          />
+          <CodeEditor slot="second-app" />
+        </AppsContainer>
       </div>
       <Button class={styles["Home__hero-button--small-screen"]} href="/start">
         Empezar

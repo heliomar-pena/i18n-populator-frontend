@@ -1,0 +1,39 @@
+.AppsContainer {
+  position: relative;
+}
+
+.AppsContainer__app {
+    transition: transform 0.3s ease, filter 1s ease-in-out;
+}
+
+.AppsContainer__app--default-first {
+    --first-x: -20px;
+    --first-y: 50%;
+    --second-x: 20px;
+    --second-y: calc(50% + 65px);
+}
+
+.AppsContainer__app--default-second {
+    --second-x: 20px;
+    --second-y: -35%;
+    --first-x: -20px;
+    --first-y: -50%;
+}
+
+.AppsContainer__app--first {
+  position: relative;
+  transform: translate(var(--first-x), var(--first-y));
+  z-index: 1;
+}
+
+.AppsContainer__app--second {
+  position: relative;
+  transform: translate(var(--second-x), var(--second-y));
+  cursor: pointer;
+  filter: blur(.5);
+  user-select: none;
+}
+
+.AppsContainer__app--second:hover {
+    position: relative;
+}

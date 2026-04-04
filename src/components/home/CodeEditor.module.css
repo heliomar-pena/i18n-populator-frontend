@@ -3,8 +3,7 @@
   width: var(--terminal--width);
   height: var(--terminal--height);
   overflow: hidden;
-  border-top-left-radius: var(--radius--2);
-  border-top-right-radius: var(--radius--2);
+  border-radius: var(--radius--2);
 
   background-color: var(--white--400);
   box-shadow: var(--shadow--normal);
@@ -15,7 +14,10 @@
   font-family: var(--font--monospaced);
   font-weight: 500;
   overflow-x: auto;
+  background-color: var(--white--800);
+  min-height: var(--space--9);
 }
+
 .CodeEditor__tabs::-webkit-scrollbar {
   display: none;
 }
