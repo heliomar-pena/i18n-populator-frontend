@@ -1,6 +1,6 @@
 import { BehaviorSubject } from "rxjs";
-import type { MessagePayload } from "./TerminalMessage.type";
+import type { MessageCollection } from "./TerminalMessage.type";
 
-const fileStore = new BehaviorSubject<MessagePayload[]>([]);
+const fileStore = new BehaviorSubject<MessageCollection>({});
 
 export default fileStore;

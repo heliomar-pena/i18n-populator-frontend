@@ -1,11 +1,11 @@
-import { concatMap, from, map, of, tap } from "rxjs";
+import { concatMap, from, fromEvent, map, of, tap } from "rxjs";
 import styles from "./CodeEditor.module.css";
 import fileStore from "./fileStore";
-import type { MessagePayload } from "./TerminalMessage.type";
+import type { MessageCollection } from "./TerminalMessage.type";
 
 class CodeEditor extends HTMLElement {
-  renderTabs(files: MessagePayload[], tabsContainer: HTMLElement) {
-    from(files)
+  renderTabs(files: MessageCollection, tabsContainer: HTMLFormElement) {
+    from(Object.values(files))
       .pipe(
         concatMap((file) =>
           of(file).pipe(
@@ -16,17 +16,10 @@ class CodeEditor extends HTMLElement {
                 `${file.language}.json`,
               );
 
-              console.log(tabsContainer)
-
-              const currentValue = (
-                tabsContainer as unknown as { file?: { value: string } }
-              )?.file?.value;
-
               element.type = "radio";
               element.id = file.language;
               element.name = "file";
               element.value = file.language;
-              if (!currentValue) element.checked = true;
               element.hidden = true;
 
               elementLabel.htmlFor = element.id;
@@ -48,6 +41,77 @@ class CodeEditor extends HTMLElement {
       .subscribe();
   }
 
+  renderContent(
+    payloads: MessageCollection,
+    tabsContainer: HTMLFormElement,
+    contentContainer: HTMLPreElement,
+  ) {
+    fromEvent(tabsContainer, "change")
+      .pipe(
+        tap(() => {
+          contentContainer.replaceChildren();
+        }),
+        tap((event) => {
+          const newSelectedValue = (
+            event.target as unknown as { form: HTMLFormElement }
+          ).form.file.value;
+
+          const payload = payloads[newSelectedValue];
+
+          if (!payload) return;
+
+          const codeContainer = document.createElement("ol");
+          codeContainer.classList.add(styles["CodeEditor__content"]);
+          contentContainer.appendChild(codeContainer);
+
+          const openBracket = document.createTextNode("{");
+          const closeBracket = document.createTextNode("}");
+
+          const key = document.createTextNode(`\t"${payload.name}"`);
+          const translation = document.createTextNode(
+            `: "${payload.translation}"`,
+          );
+
+          const openBracketContainer = document.createElement("li");
+          openBracketContainer.appendChild(openBracket);
+          openBracketContainer.classList.add(
+            styles["CodeEditor__content-item"],
+          );
+          openBracketContainer.classList.add(
+            styles["CodeEditor__content-text--light"],
+          );
+
+          const keyContainer = document.createElement("span");
+          keyContainer.appendChild(key);
+          keyContainer.classList.add(styles["CodeEditor__content-text--light"]);
+
+          const translationContainer = document.createElement("span");
+          translationContainer.append(translation);
+
+          const keyValueContainer = document.createElement("li");
+          keyValueContainer.appendChild(keyContainer);
+          keyValueContainer.appendChild(translationContainer);
+          keyValueContainer.classList.add(
+            styles["CodeEditor__content-item"],
+          );
+
+          const closeBracketContainer = document.createElement("li");
+          closeBracketContainer.appendChild(closeBracket);
+          closeBracketContainer.classList.add(
+            styles["CodeEditor__content-item"],
+          );
+          closeBracketContainer.classList.add(
+            styles["CodeEditor__content-text--light"],
+          );
+
+          codeContainer.appendChild(openBracketContainer);
+          codeContainer.appendChild(keyValueContainer);
+          codeContainer.appendChild(closeBracketContainer);
+        }),
+      )
+      .subscribe();
+  }
+
   connectedCallback() {
     this.classList.add(styles.CodeEditor);
 
@@ -58,7 +122,11 @@ class CodeEditor extends HTMLElement {
       tabsContainer.classList.add(styles.CodeEditor__tabs);
       this.appendChild(tabsContainer);
 
+      const contentContainer = document.createElement("pre");
+      this.appendChild(contentContainer);
+
       this.renderTabs(payloads, tabsContainer);
+      this.renderContent(payloads, tabsContainer, contentContainer);
     });
   }
 }

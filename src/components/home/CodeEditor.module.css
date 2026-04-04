@@ -8,10 +8,6 @@
 
   background-color: var(--white--400);
   box-shadow: var(--shadow--normal);
-
-  position: relative;
-  transform: translateY(-90%) translateX(5%);
-  z-index: -1;
 }
 
 .CodeEditor__tabs {
@@ -19,10 +15,7 @@
   font-family: var(--font--monospaced);
   font-weight: 500;
   overflow-x: auto;
-  container-type: scroll-state;
-  container-name: tabs-container;
 }
-
 .CodeEditor__tabs::-webkit-scrollbar {
   display: none;
 }
@@ -38,4 +31,25 @@
 .CodeEditor__tab:has(:checked) {
   background-color: var(--primary--500);
   color: var(--primary--900);
+}
+
+.CodeEditor__content {
+  color: var(--black--900);
+  font-family: var(--font--monospaced);
+  font-size: var(--monospaced--bold);
+  counter-reset: lineOfCode 0;
+  padding: var(--space--4) var(--space--7);
+}
+
+.CodeEditor__content-text--light {
+  color: var(--black--500);
+}
+
+.CodeEditor__content-item {
+    counter-increment: lineOfCode +1;
+}
+
+.CodeEditor__content-item::marker {
+  color: var(--black--500);
+  content: counter(lineOfCode) " ";
 }

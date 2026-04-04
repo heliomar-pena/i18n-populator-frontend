@@ -51,7 +51,7 @@ const renderMessage = (element: HTMLLIElement, message: Message) => {
     delay(message.duration ?? 0),
     filter(() => message.payload !== undefined),
     tap(() => {
-      fileStore.next([...fileStore.getValue(), message.payload!]);
+      fileStore.next({...fileStore.getValue(), [message.payload!.language]: message.payload!});
     }),
   );
 };
