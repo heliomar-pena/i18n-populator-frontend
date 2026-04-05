@@ -4,7 +4,13 @@ import fileStore from "./fileStore";
 import type { MessageCollection } from "./TerminalMessage.type";
 
 class CodeEditor extends HTMLElement {
-  renderTabs(files: MessageCollection, tabsContainer: HTMLFormElement) {
+  latestSavedValue: string = "";
+
+  renderTabs(
+    files: MessageCollection,
+    tabsContainer: HTMLFormElement,
+    contentContainer: HTMLPreElement,
+  ) {
     from(Object.values(files))
       .pipe(
         concatMap((file) =>
@@ -30,10 +36,25 @@ class CodeEditor extends HTMLElement {
               elementLabel.classList.add(styles.CodeEditor__tab);
               element.classList.add(styles["CodeEditor__tab-input"]);
 
-              return elementLabel;
+              return {
+                inputElement: element,
+                labelElement: elementLabel,
+                file,
+              };
             }),
-            tap((element) => {
-              tabsContainer.appendChild(element);
+            tap(({ inputElement, file }) => {
+              if (this.latestSavedValue === file.language) {
+                inputElement.checked = true;
+                this.#renderCodeSection(file.language, files, contentContainer);
+              }
+
+              if (!this.latestSavedValue) {
+                inputElement.checked = true;
+                this.#renderCodeSection(file.language, files, contentContainer);
+              }
+            }),
+            tap(({ labelElement }) => {
+              tabsContainer.appendChild(labelElement);
             }),
           ),
         ),
@@ -51,65 +72,66 @@ class CodeEditor extends HTMLElement {
         tap(() => {
           contentContainer.replaceChildren();
         }),
-        tap((event) => {
-          const newSelectedValue = (
-            event.target as unknown as { form: HTMLFormElement }
-          ).form.file.value;
-
-          const payload = payloads[newSelectedValue];
-
-          if (!payload) return;
-
-          const codeContainer = document.createElement("ol");
-          codeContainer.classList.add(styles["CodeEditor__content"]);
-          contentContainer.appendChild(codeContainer);
-
-          const openBracket = document.createTextNode("{");
-          const closeBracket = document.createTextNode("}");
-
-          const key = document.createTextNode(`\t"${payload.name}"`);
-          const translation = document.createTextNode(
-            `: "${payload.translation}"`,
-          );
-
-          const openBracketContainer = document.createElement("li");
-          openBracketContainer.appendChild(openBracket);
-          openBracketContainer.classList.add(
-            styles["CodeEditor__content-item"],
-          );
-          openBracketContainer.classList.add(
-            styles["CodeEditor__content-text--light"],
-          );
-
-          const keyContainer = document.createElement("span");
-          keyContainer.appendChild(key);
-          keyContainer.classList.add(styles["CodeEditor__content-text--light"]);
-
-          const translationContainer = document.createElement("span");
-          translationContainer.append(translation);
-
-          const keyValueContainer = document.createElement("li");
-          keyValueContainer.appendChild(keyContainer);
-          keyValueContainer.appendChild(translationContainer);
-          keyValueContainer.classList.add(
-            styles["CodeEditor__content-item"],
-          );
-
-          const closeBracketContainer = document.createElement("li");
-          closeBracketContainer.appendChild(closeBracket);
-          closeBracketContainer.classList.add(
-            styles["CodeEditor__content-item"],
-          );
-          closeBracketContainer.classList.add(
-            styles["CodeEditor__content-text--light"],
-          );
-
-          codeContainer.appendChild(openBracketContainer);
-          codeContainer.appendChild(keyValueContainer);
-          codeContainer.appendChild(closeBracketContainer);
+        map((event) => {
+          return (event.target as unknown as { form: HTMLFormElement }).form
+            .file.value;
         }),
+        tap((value) =>
+          this.#renderCodeSection(value, payloads, contentContainer),
+        ),
       )
       .subscribe();
+  }
+
+  #renderCodeSection(
+    newSelectedValue: string,
+    payloads: MessageCollection,
+    contentContainer: HTMLPreElement,
+  ) {
+    this.latestSavedValue = newSelectedValue;
+    const payload = payloads[newSelectedValue];
+
+    if (!payload) return;
+
+    const codeContainer = document.createElement("ol");
+    codeContainer.classList.add(styles["CodeEditor__content"]);
+    contentContainer.appendChild(codeContainer);
+
+    const openBracket = document.createTextNode("{");
+    const closeBracket = document.createTextNode("}");
+
+    const key = document.createTextNode(`\t"${payload.name}"`);
+    const translation = document.createTextNode(`: "${payload.translation}"`);
+
+    const openBracketContainer = document.createElement("li");
+    openBracketContainer.appendChild(openBracket);
+    openBracketContainer.classList.add(styles["CodeEditor__content-item"]);
+    openBracketContainer.classList.add(
+      styles["CodeEditor__content-text--light"],
+    );
+
+    const keyContainer = document.createElement("span");
+    keyContainer.appendChild(key);
+    keyContainer.classList.add(styles["CodeEditor__content-text--light"]);
+
+    const translationContainer = document.createElement("span");
+    translationContainer.append(translation);
+
+    const keyValueContainer = document.createElement("li");
+    keyValueContainer.appendChild(keyContainer);
+    keyValueContainer.appendChild(translationContainer);
+    keyValueContainer.classList.add(styles["CodeEditor__content-item"]);
+
+    const closeBracketContainer = document.createElement("li");
+    closeBracketContainer.appendChild(closeBracket);
+    closeBracketContainer.classList.add(styles["CodeEditor__content-item"]);
+    closeBracketContainer.classList.add(
+      styles["CodeEditor__content-text--light"],
+    );
+
+    codeContainer.appendChild(openBracketContainer);
+    codeContainer.appendChild(keyValueContainer);
+    codeContainer.appendChild(closeBracketContainer);
   }
 
   connectedCallback() {
@@ -125,8 +147,15 @@ class CodeEditor extends HTMLElement {
       const contentContainer = document.createElement("pre");
       this.appendChild(contentContainer);
 
-      this.renderTabs(payloads, tabsContainer);
       this.renderContent(payloads, tabsContainer, contentContainer);
+      this.renderTabs(payloads, tabsContainer, contentContainer);
+
+      if (!Object.keys(payloads).length) {
+        const waitingText = document.createElement("p");
+        waitingText.textContent = "Waiting terminal to open files";
+        contentContainer.appendChild(waitingText);
+        contentContainer.classList.add(styles["CodeEditor__content--empty"]);
+      }
     });
   }
 }

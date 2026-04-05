@@ -16,6 +16,7 @@
 .Home__hero-container {
   height: 100%;
   width: 100%;
+  min-height: calc(var(--terminal--height) + var(--space--10));
   display: flex;
   justify-content: space-between;
   align-items: center;

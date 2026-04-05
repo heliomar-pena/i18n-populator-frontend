@@ -56,3 +56,8 @@
   color: var(--black--500);
   content: counter(lineOfCode) " ";
 }
+
+.CodeEditor__content--empty {
+  color: var(--black--800);
+  padding: var(--space--4);
+}
