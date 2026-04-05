@@ -93,7 +93,10 @@ const messages: Message[] = [
         <h1 class={styles["Home__hero-title"]}>
           Crea traducciones en segundos con un solo comando
         </h1>
-        <Button class={styles["Home__hero-button"]} href="/start">
+        <Button
+          class={styles["Home__hero-button"]}
+          href="https://github.com/heliomar-pena/i18n-populator?tab=readme-ov-file#get-started"
+        >
           Empezar
         </Button>
       </div>
@@ -107,65 +110,82 @@ const messages: Message[] = [
           <CodeEditor slot="second-app" />
         </AppsContainer>
       </div>
-      <Button class={styles["Home__hero-button--small-screen"]} href="/start">
+      <Button
+        class={styles["Home__hero-button--small-screen"]}
+        href="https://github.com/heliomar-pena/i18n-populator?tab=readme-ov-file#get-started"
+      >
         Empezar
       </Button>
     </div>
     <footer class={styles["Home__hero-footer"]}>
-      <div class={styles["Home__hero-footer-space"]}></div>
-      <p class={styles["Home__hero-footer-text"]}>¿Cómo funciona?</p>
-      <div class={styles["Home__hero-footer-icon"]}>
-        <ChevronDown />
-      </div>
+      <a href="#how-it-works" class={styles["Home__hero-footer-anchor"]}>
+        <div class={styles["Home__hero-footer-space"]}></div>
+        <p class={styles["Home__hero-footer-text"]}>¿Cómo funciona?</p>
+        <div class={styles["Home__hero-footer-icon"]}>
+          <ChevronDown />
+        </div>
+      </a>
     </footer>
   </section>
   <div class={styles.Home__content}>
-    <section
-      class:list={[styles["Home__content-section"], styles["Home__comparison"]]}
-    >
-      <h2>No más traducciones manuales</h2>
-      <p>
-        Cuando trabajas con proyectos internacionalizados, uno de los mayores
-        retos es agregar traducciones para cada texto incluído en cada uno de
-        los idiomas soportados.
-      </p>
-      <p>
-        Esto no es solo lento y te detiene de programar para realizar tareas
-        manuales y tediosas, sino que además es muy propenso a errores humanos y
-        causar conflictos con las traducciones agregadas por tus compañeros.
-      </p>
-      <p>
-        Usando <b>i18n-populator</b> como herramienta central para agregar traducciones
-        en tu equipo, prevendrá conflictos entre ramas (al incluir las traducciones
-        alfabéticamente) y disminuirá el número de errors humanos (no más traducciones
-        manuales).
-      </p>
-      <Skeleton width={1226} height={604} />
-    </section>
     <section
       class:list={[
         styles["Home__content-section"],
         styles["Home__translators"],
       ]}
     >
-      <h2>Usa tu motor de traducción favorito</h2>
+      <h2 id="how-it-works">
+        Elige un motor de traducciones entre populares opciones
+      </h2>
       <p>
-        <b>i18n-populator</b> está actualizándose constantemente para agregar soporte
-        a nuevos motores de traducción.
+        i18n-populator es una herramienta de consola que permite generar
+        traducciones en segundos a diferentes idiomas haciendo uso de los
+        motores de traducción que existen actualmente. Se integra con diferentes
+        servicios que se encargan de generar la traducción del texto, pide
+        traducir el texto proveído a cada uno de los idiomas deseados y luego
+        inserta el resultado traducido en tus archivos de traducción de forma
+        automática.
+      </p>
+      <p>
+        Actualmente se da soporte a: <b
+          >Bing, DeepL, Google, LibreTranslate and OpenAI API Compatible LLMs</b
+        >
       </p>
       <TranslationEnginerList />
     </section>
     <section
       class:list={[styles["Home__content-section"], styles["Home__countries"]]}
     >
-      <h2>Genera traducciones para más de 150 países</h2>
+      <h2>Selecciona los países para los cuales deseas traducir</h2>
       <p>
-        Traduce tu contenido a más de 184 idiomas y hazlo accesible globalmente.
+        Crea un archivo de configuración para especificar todos los países a los
+        que quieras agregar traducciones, puedes hacer esta configuración una
+        vez, asi no deberás especificar todos los países manualmente cada vez.
       </p>
+      <p>Actualmente se soportan idiomas de más de 150 países.</p>
       <Countries />
     </section>
+    <sectison
+      class:list={[styles["Home__content-section"], styles["Home__comparison"]]}
+    >
+      <h2>Empieza a generar traducciones con un solo comando</h2>
+      <p>
+        Cuando trabajas con proyectos internacionalizados, uno de trabajos más
+        tediosos es agregar traducciones para cada texto incluído en cada uno de
+        los idiomas soportados.
+      </p>
+      <p>
+        Usando <b>i18n-populator</b> como herramienta central para agregar traducciones
+        en tu equipo solo tienes que correr un comando para traducir el texto a todos
+        los idiomas soportados, la mejor parte es que automaticamente agrega este
+        texto a los archivos JSON de tu proyecto para ahorrarte el copiar y pegar.
+      </p>
+    </sectison>
     <div class={styles["Home__footer-cta"]}>
-      <Button class={styles["Home__footer-cta-button"]} href="/start">
+      <Button
+        class={styles["Home__footer-cta-button"]}
+        href="https://github.com/heliomar-pena/i18n-populator?tab=readme-ov-file#get-started"
+      >
         Empezar a Generar Traducciones
       </Button>
     </div>

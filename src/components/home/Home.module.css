@@ -27,14 +27,24 @@
   text-align: center;
 }
 
-.Home__hero-footer {
+.Home__hero-footer-anchor {
   display: flex;
   justify-content: space-between;
   width: 100%;
 }
 
+.Home__hero-footer-anchor {
+  color: currentColor;
+  text-decoration: none;
+}
+
 .Home__hero-footer-icon {
   color: var(--primary--600);
+  transition: transform 0.3s ease;
+}
+
+.Home__hero-footer:has(.Home__hero-footer-anchor:hover) .Home__hero-footer-icon {
+  transform: translateY(2px);
 }
 
 .Home__hero-button--small-screen {

@@ -74,6 +74,10 @@
   --terminal--height: 391px;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   font-family: var(--font--body);
   color: var(--black--900)
