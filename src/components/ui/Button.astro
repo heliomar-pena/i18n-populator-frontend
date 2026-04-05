@@ -25,7 +25,11 @@ const variantStyle =
       <slot />
     </a>
   ) : (
-    <button type={type} {...props} class:list={[className, styles.Button, variantStyle]}>
+    <button
+      type={type}
+      {...props}
+      class:list={[className, styles.Button, variantStyle]}
+    >
       <slot />
     </button>
   )

@@ -49,7 +49,7 @@
 }
 
 .CodeEditor__content-item {
-    counter-increment: lineOfCode +1;
+  counter-increment: lineOfCode + 1;
 }
 
 .CodeEditor__content-item::marker {

@@ -1,5 +1,5 @@
 ---
-import type { Message } from './TerminalMessage.type';
+import type { Message } from "./TerminalMessage.type";
 
 interface Props {
   messages: Message[];
@@ -8,8 +8,11 @@ interface Props {
 const { messages } = Astro.props;
 ---
 
-<message-ui class="TerminalMessage" data-messages={JSON.stringify(messages)} id="terminal-messages">
+<message-ui
+  class="TerminalMessage"
+  data-messages={JSON.stringify(messages)}
+  id="terminal-messages"
+>
 </message-ui>
 
-<script src="./TerminalMessage.ts">
-</script>
+<script src="./TerminalMessage.ts"></script>

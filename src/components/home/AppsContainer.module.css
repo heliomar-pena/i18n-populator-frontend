@@ -10,27 +10,35 @@
 }
 
 .AppsContainer__app {
-    transition: transform 0.3s ease, filter 0.5s ease-in-out;
-    position: absolute;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    right: 0;
+  transition:
+    transform 0.3s ease,
+    filter 0.5s ease-in-out;
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
 }
 
 .AppsContainer__app--first {
-  transform: translate(calc(var(--app--offset) * -1), calc(var(--app--offset) * -1));
+  transform: translate(
+    calc(var(--app--offset) * -1),
+    calc(var(--app--offset) * -1)
+  );
   z-index: 1;
 }
 
 .AppsContainer__app--second {
   transform: translate(var(--app--offset), var(--app--offset));
   cursor: pointer;
-  filter: blur(.5px);
+  filter: blur(0.5px);
   user-select: none;
   opacity: 0.5;
 }
 
 .AppsContainer__app--second:hover {
-  transform: translate(calc(var(--app--offset) * 1.25), calc(var(--app--offset) * 1.25));
+  transform: translate(
+    calc(var(--app--offset) * 1.25),
+    calc(var(--app--offset) * 1.25)
+  );
 }

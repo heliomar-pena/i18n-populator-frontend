@@ -1,6 +1,5 @@
 .TranslationEnginerList {
-    display: flex;
-    list-style: none;
-    justify-content: space-around;
+  display: flex;
+  list-style: none;
+  justify-content: space-around;
 }
-

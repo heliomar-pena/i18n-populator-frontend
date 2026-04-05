@@ -1,31 +1,29 @@
 .Button {
-    --button-background: var(--primary--500);
-    --button-hover-background: var(--primary--600);
-    --button-active-background: var(--primary--700);
+  --button-background: var(--primary--500);
+  --button-hover-background: var(--primary--600);
+  --button-active-background: var(--primary--700);
 
-    --button-color: var(--black--900);
+  --button-color: var(--black--900);
 
-    background-color: var(--button-background);
-    color: var(--button-color);
-    font-size: var(--font--body--normal);
-    font-family: var(--font--body);
-    padding: var(--space--4);
-    border-radius: var(--radius--2);
-    border: unset;
-    display: inline-block;
-    text-decoration: none;
+  background-color: var(--button-background);
+  color: var(--button-color);
+  font-size: var(--font--body--normal);
+  font-family: var(--font--body);
+  padding: var(--space--4);
+  border-radius: var(--radius--2);
+  border: unset;
+  display: inline-block;
+  text-decoration: none;
 
-    cursor: pointer;
+  cursor: pointer;
 
-    transition: background-color 0.2s ease-in-out;
+  transition: background-color 0.2s ease-in-out;
 }
 
 .Button:hover {
-    background-color: var(--button-hover-background);
+  background-color: var(--button-hover-background);
 }
 
 .Button:active {
-    background-color: var(--button-active-background);
+  background-color: var(--button-active-background);
 }
-
-

@@ -61,11 +61,11 @@
   --space--10: 4rem; /* 64px */
 
   /* Border radius scale (4px steps) */
-  --radius--0: 0;        /* 0px */
-  --radius--1: 0.25rem;  /* 4px */
-  --radius--2: 0.5rem;   /* 8px */
-  --radius--3: 0.75rem;  /* 12px */
-  --radius--4: 1rem;     /* 16px */
+  --radius--0: 0; /* 0px */
+  --radius--1: 0.25rem; /* 4px */
+  --radius--2: 0.5rem; /* 8px */
+  --radius--3: 0.75rem; /* 12px */
+  --radius--4: 1rem; /* 16px */
 
   --radius--full: 9999px;
 
@@ -80,7 +80,7 @@ html {
 
 body {
   font-family: var(--font--body);
-  color: var(--black--900)
+  color: var(--black--900);
 }
 
 h1,

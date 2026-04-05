@@ -12,11 +12,10 @@
 }
 
 .TerminalHeader {
-    background-color: var(--white--800);
-    font-size: var(--body--small);
-    text-align: center;
-    width: 100%;
-    font-weight: 600;
-    padding: var(--space--2) 0;
-    
+  background-color: var(--white--800);
+  font-size: var(--body--small);
+  text-align: center;
+  width: 100%;
+  font-weight: 600;
+  padding: var(--space--2) 0;
 }

@@ -1,8 +1,8 @@
 export type MessageAnimation = "write" | "fade";
 
 export interface MessageCollection {
-  [key: string]: MessagePayload
-} 
+  [key: string]: MessagePayload;
+}
 
 export interface MessagePayload {
   language: string;

@@ -14,11 +14,19 @@ class AppContainer extends HTMLElement {
         }),
         map(({ event, target }) => {
           if (defaultFirstApp.contains(target)) {
-            return { event, target: defaultFirstApp, otherApp: defaultSecondApp };
+            return {
+              event,
+              target: defaultFirstApp,
+              otherApp: defaultSecondApp,
+            };
           }
 
           if (defaultSecondApp.contains(target)) {
-            return { event, target: defaultSecondApp, otherApp: defaultFirstApp };
+            return {
+              event,
+              target: defaultSecondApp,
+              otherApp: defaultFirstApp,
+            };
           }
 
           return { event, target: null, otherApp: null };
