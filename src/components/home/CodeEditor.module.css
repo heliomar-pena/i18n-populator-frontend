@@ -16,6 +16,7 @@
   overflow-x: auto;
   background-color: var(--white--800);
   min-height: var(--space--9);
+  user-select: none;
 }
 
 .CodeEditor__tabs::-webkit-scrollbar {
